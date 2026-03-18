@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin — Nisha's Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#0d0f0e;--surface:#141714;--border:#232623;
+      --text:#e8ebe6;--muted:#6b7068;--accent:#7fff6a;--red:#ff6b6b;--warm:#f0e6c8;
+    }
+    body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;font-size:14px;min-height:100vh}
+
+    /* LOGIN */
+    #login-screen{
+      display:flex;align-items:center;justify-content:center;min-height:100vh;
+      background:var(--bg);
+    }
+    .login-box{
+      width:360px;background:var(--surface);border:1px solid var(--border);
+      border-radius:10px;padding:2.5rem;
+    }
+    .login-box h1{font-size:1.3rem;margin-bottom:0.3rem}
+    .login-box p{font-size:0.78rem;color:var(--muted);margin-bottom:2rem}
+    .field{margin-bottom:1rem}
+    .field label{display:block;font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem}
+    .field input{
+      width:100%;background:var(--bg);border:1px solid var(--border);border-radius:4px;
+      padding:0.7rem 0.9rem;color:var(--text);font-family:'Syne',sans-serif;font-size:0.85rem;
+      outline:none;transition:border-color 0.2s;
+    }
+    .field input:focus{border-color:var(--accent)}
+    .btn-login{
+      width:100%;background:var(--accent);color:var(--bg);border:none;border-radius:4px;
+      padding:0.75rem;font-family:'Syne',sans-serif;font-size:0.82rem;font-weight:700;
+      letter-spacing:0.06em;cursor:pointer;transition:opacity 0.2s;margin-top:0.5rem;
+    }
+    .btn-login:hover{opacity:0.85}
+    .login-error{color:var(--red);font-size:0.78rem;margin-top:0.8rem;display:none}
+
+    /* DASHBOARD */
+    #dashboard{display:none}
+    header{
+      background:var(--surface);border-bottom:1px solid var(--border);
+      padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;
+      position:sticky;top:0;z-index:100;
+    }
+    .header-left{display:flex;align-items:center;gap:1rem}
+    .header-left h1{font-size:1rem;font-weight:700}
+    .badge{
+      background:rgba(127,255,106,0.1);color:var(--accent);
+      border:1px solid rgba(127,255,106,0.25);
+      font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+      padding:0.2rem 0.6rem;border-radius:100px;
+    }
+    .unread-badge{background:rgba(255,107,107,0.12);color:var(--red);border-color:rgba(255,107,107,0.3)}
+    .btn-logout{
+      background:transparent;color:var(--muted);border:1px solid var(--border);
+      border-radius:4px;padding:0.4rem 1rem;font-family:'Syne',sans-serif;
+      font-size:0.75rem;cursor:pointer;transition:all 0.2s;
+    }
+    .btn-logout:hover{border-color:var(--red);color:var(--red)}
+
+    main{max-width:1000px;margin:0 auto;padding:2rem}
+
+    /* STATS */
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
+    .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.4rem}
+    .stat-card .num{font-size:2rem;font-weight:700;color:var(--accent);line-height:1}
+    .stat-card .lbl{font-size:0.72rem;color:var(--muted);margin-top:0.3rem;letter-spacing:0.05em}
+
+    /* CONTROLS */
+    .controls{display:flex;gap:0.8rem;margin-bottom:1.5rem;flex-wrap:wrap;align-items:center}
+    .filter-btn{
+      background:transparent;color:var(--muted);border:1px solid var(--border);
+      border-radius:4px;padding:0.4rem 0.9rem;font-family:'Syne',sans-serif;
+      font-size:0.75rem;cursor:pointer;transition:all 0.2s;
+    }
+    .filter-btn.active,.filter-btn:hover{border-color:var(--accent);color:var(--accent)}
+    .btn-delete-all{
+      margin-left:auto;background:transparent;color:var(--red);
+      border:1px solid rgba(255,107,107,0.3);border-radius:4px;
+      padding:0.4rem 0.9rem;font-family:'Syne',sans-serif;font-size:0.75rem;
+      cursor:pointer;transition:all 0.2s;
+    }
+    .btn-delete-all:hover{background:rgba(255,107,107,0.08)}
+
+    /* MESSAGES */
+    #messages-list{display:flex;flex-direction:column;gap:0}
+    .msg-card{
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:0;border-bottom:none;padding:1.4rem 1.6rem;
+      transition:background 0.2s;
+    }
+    .msg-card:first-child{border-radius:8px 8px 0 0}
+    .msg-card:last-child{border-radius:0 0 8px 8px;border-bottom:1px solid var(--border)}
+    .msg-card:only-child{border-radius:8px;border-bottom:1px solid var(--border)}
+    .msg-card.unread{border-left:3px solid var(--accent)}
+    .msg-card:hover{background:#1a1d1a}
+    .msg-top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:0.6rem}
+    .msg-sender{display:flex;align-items:center;gap:0.7rem}
+    .msg-avatar{
+      width:34px;height:34px;border-radius:50%;
+      background:rgba(127,255,106,0.1);border:1px solid rgba(127,255,106,0.2);
+      display:flex;align-items:center;justify-content:center;
+      font-size:0.78rem;font-weight:700;color:var(--accent);flex-shrink:0;
+    }
+    .msg-name{font-size:0.88rem;font-weight:600}
+    .msg-email{font-size:0.75rem;color:var(--muted)}
+    .msg-right{display:flex;align-items:center;gap:0.6rem;flex-shrink:0}
+    .msg-date{font-size:0.68rem;color:var(--muted);letter-spacing:0.04em}
+    .new-dot{width:7px;height:7px;background:var(--accent);border-radius:50%;flex-shrink:0}
+    .msg-body{font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:0.8rem}
+    .msg-actions{display:flex;gap:0.6rem}
+    .btn-sm{
+      background:transparent;border:1px solid var(--border);color:var(--muted);
+      border-radius:3px;padding:0.28rem 0.75rem;font-family:'Syne',sans-serif;
+      font-size:0.68rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;
+      cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-flex;align-items:center;
+    }
+    .btn-sm:hover{border-color:var(--accent);color:var(--accent)}
+    .btn-sm.danger:hover{border-color:var(--red);color:var(--red)}
+    .btn-sm.read-btn{border-color:rgba(127,255,106,0.3);color:var(--accent)}
+
+    .empty{
+      text-align:center;padding:4rem;color:var(--muted);
+      background:var(--surface);border:1px solid var(--border);border-radius:8px;
+    }
+    .empty .icon{font-size:2.5rem;margin-bottom:1rem}
+    .loader{text-align:center;padding:3rem;color:var(--muted)}
+
+    /* TOAST */
+    .toast{
+      position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:6px;padding:0.9rem 1.4rem;
+      font-size:0.82rem;color:var(--text);
+      transform:translateY(80px);opacity:0;
+      transition:all 0.3s;pointer-events:none;
+    }
+    .toast.show{transform:translateY(0);opacity:1}
+    .toast.success{border-color:rgba(127,255,106,0.4);color:var(--accent)}
+    .toast.error{border-color:rgba(255,107,107,0.4);color:var(--red)}
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <h1>Admin Panel</h1>
+    <p>Nisha Kumari — Portfolio Dashboard</p>
+    <div class="field">
+      <label>Username</label>
+      <input type="text" id="username" placeholder="nisha" autocomplete="username"/>
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="password" placeholder="••••••••" autocomplete="current-password"/>
+    </div>
+    <button class="btn-login" onclick="login()">Sign in →</button>
+    <div class="login-error" id="login-error"></div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <header>
+    <div class="header-left">
+      <h1>Portfolio Admin</h1>
+      <span class="badge">Nisha Kumari</span>
+      <span class="badge unread-badge" id="unread-header" style="display:none">0 unread</span>
+    </div>
+    <button class="btn-logout" onclick="logout()">Sign out</button>
+  </header>
+
+  <main>
+    <div class="stats">
+      <div class="stat-card">
+        <div class="num" id="stat-total">—</div>
+        <div class="lbl">Total messages</div>
+      </div>
+      <div class="stat-card">
+        <div class="num" id="stat-unread">—</div>
+        <div class="lbl">Unread</div>
+      </div>
+      <div class="stat-card">
+        <div class="num" id="stat-today">—</div>
+        <div class="lbl">Received today</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
+      <button class="filter-btn" onclick="setFilter('unread', this)">Unread only</button>
+      <button class="btn-delete-all" onclick="deleteAll()">Delete all</button>
+    </div>
+
+    <div id="messages-list"><div class="loader">Loading messages…</div></div>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const API = 'http://localhost:3001/api';
+  let token = localStorage.getItem('admin_token');
+  let filterMode = 'all';
+
+  // ── Boot ──
+  if (token) showDashboard();
+
+  async function login() {
+    const u = document.getElementById('username').value.trim();
+    const p = document.getElementById('password').value;
+    const err = document.getElementById('login-error');
+    err.style.display = 'none';
+    try {
+      const r = await fetch(`${API}/admin/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: u, password: p }),
+      });
+      const data = await r.json();
+      if (!r.ok) { err.textContent = data.error; err.style.display = 'block'; return; }
+      token = data.token;
+      localStorage.setItem('admin_token', token);
+      showDashboard();
+    } catch { err.textContent = 'Server unreachable.'; err.style.display = 'block'; }
+  }
+
+  function showDashboard() {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    loadMessages();
+  }
+
+  function logout() {
+    localStorage.removeItem('admin_token');
+    token = null;
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('dashboard').style.display = 'none';
+  }
+
+  function setFilter(mode, el) {
+    filterMode = mode;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+    loadMessages();
+  }
+
+  async function loadMessages() {
+    const list = document.getElementById('messages-list');
+    list.innerHTML = '<div class="loader">Loading…</div>';
+    try {
+      const url = `${API}/admin/messages${filterMode === 'unread' ? '?unread=true' : ''}`;
+      const r = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
+      if (r.status === 401) { logout(); return; }
+      const data = await r.json();
+
+      // Stats
+      document.getElementById('stat-total').textContent  = data.total;
+      document.getElementById('stat-unread').textContent = data.unreadCount;
+
+      const today = data.messages.filter(m =>
+        new Date(m.createdAt).toDateString() === new Date().toDateString()
+      ).length;
+      document.getElementById('stat-today').textContent = today;
+
+      // Unread badge in header
+      const hdr = document.getElementById('unread-header');
+      if (data.unreadCount > 0) { hdr.style.display = ''; hdr.textContent = `${data.unreadCount} unread`; }
+      else hdr.style.display = 'none';
+
+      // Render messages
+      if (!data.messages.length) {
+        list.innerHTML = `<div class="empty"><div class="icon">📭</div><p>No messages yet.</p></div>`;
+        return;
+      }
+
+      list.innerHTML = data.messages.map(m => `
+        <div class="msg-card ${m.read ? '' : 'unread'}" id="msg-${m.id}">
+          <div class="msg-top">
+            <div class="msg-sender">
+              <div class="msg-avatar">${m.name.charAt(0).toUpperCase()}</div>
+              <div>
+                <div class="msg-name">${esc(m.name)}</div>
+                <div class="msg-email">${esc(m.email)}</div>
+              </div>
+            </div>
+            <div class="msg-right">
+              <span class="msg-date">${formatDate(m.createdAt)}</span>
+              ${!m.read ? '<div class="new-dot"></div>' : ''}
+            </div>
+          </div>
+          <div class="msg-body">${esc(m.message)}</div>
+          <div class="msg-actions">
+            <a href="mailto:${esc(m.email)}?subject=Re: Your message&body=Hi ${esc(m.name)},%0A%0A" class="btn-sm">Reply via email</a>
+            ${!m.read ? `<button class="btn-sm read-btn" onclick="markRead('${m.id}')">Mark read</button>` : ''}
+            <button class="btn-sm danger" onclick="deleteMsg('${m.id}')">Delete</button>
+          </div>
+        </div>
+      `).join('');
+
+    } catch (e) { list.innerHTML = `<div class="empty"><p>Error: ${e.message}</p></div>`; }
+  }
+
+  async function markRead(id) {
+    await fetch(`${API}/admin/messages/${id}/read`, {
+      method: 'PATCH', headers: { Authorization: `Bearer ${token}` },
+    });
+    loadMessages(); toast('Marked as read', 'success');
+  }
+
+  async function deleteMsg(id) {
+    if (!confirm('Delete this message?')) return;
+    const r = await fetch(`${API}/admin/messages/${id}`, {
+      method: 'DELETE', headers: { Authorization: `Bearer ${token}` },
+    });
+    if (r.ok) { loadMessages(); toast('Message deleted', 'success'); }
+    else toast('Failed to delete', 'error');
+  }
+
+  async function deleteAll() {
+    if (!confirm('Delete ALL messages? This cannot be undone.')) return;
+    const r = await fetch(`${API}/admin/messages`, {
+      method: 'DELETE', headers: { Authorization: `Bearer ${token}` },
+    });
+    if (r.ok) { loadMessages(); toast('All messages deleted', 'success'); }
+  }
+
+  function formatDate(iso) {
+    const d = new Date(iso);
+    return d.toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' })
+      + ' · ' + d.toLocaleTimeString('en-IN', { hour:'2-digit', minute:'2-digit' });
+  }
+  function esc(s) { return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  function toast(msg, type='success') {
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.className = `toast ${type} show`;
+    setTimeout(() => t.classList.remove('show'), 2800);
+  }
+
+  // Enter key on login
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && document.getElementById('login-screen').style.display !== 'none') login();
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nisha Kumari — Developer & AI Engineer</title>
+  <meta name="description" content="Nisha Kumari — Final-year IT student from Visakhapatnam. Building AI agents, automation workflows and full-stack apps. Open to jobs and internships."/>
+  <meta name="keywords" content="Nisha Kumari, AI Engineer, Python Developer, LangChain, MCP, Full Stack Developer, Visakhapatnam, Portfolio"/>
+  <meta name="author" content="Nisha Kumari"/>
+  <meta name="robots" content="index, follow"/>
+  <meta property="og:title" content="Nisha Kumari — Developer & AI Engineer"/>
+  <meta property="og:description" content="Final-year IT student building AI agents, automation workflows and full-stack apps. Open to jobs and internships."/>
+  <meta property="og:image" content="portfolio-img"/>
+  <meta property="og:type" content="website"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Nisha Kumari — Developer & AI Engineer"/>
+  <meta name="twitter:description" content="Building AI agents, automation workflows and full-stack apps."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0d0f0e;
+      --surface:  #141714;
+      --border:   #232623;
+      --text:     #e8ebe6;
+      --muted:    #6b7068;
+      --accent:   #4d9fff;
+      --accent2:  #82bfff;
+      --warm:     #f0e6c8;
+      --red:      #ff6b6b;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      cursor: none;
+      overflow-x: hidden;
+    }
+
+    /* ── CURSOR ── */
+    #cursor {
+      width: 10px; height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s, background 0.2s;
+    }
+    #cursor-ring {
+      width: 34px; height: 34px;
+      border: 1.5px solid rgba(127,255,106,0.35);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.12s ease-out, width 0.25s, height 0.25s;
+    }
+    body:has(a:hover) #cursor { width: 18px; height: 18px; background: var(--accent2); }
+
+    /* ── GRAIN OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 10000; opacity: 0.55;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 500;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 3.5rem;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s, background 0.3s, backdrop-filter 0.3s;
+    }
+    nav.scrolled {
+      border-color: var(--border);
+      background: rgba(13,15,14,0.85);
+      backdrop-filter: blur(14px);
+    }
+    .nav-logo {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.3rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2.4rem; list-style: none; align-items: center; }
+    .nav-links a {
+      text-decoration: none; color: var(--muted);
+      font-size: 0.8rem; font-weight: 500; letter-spacing: 0.07em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-badge {
+      background: var(--accent); color: var(--bg);
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em;
+      padding: 0.3rem 0.9rem; border-radius: 100px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .nav-badge:hover { opacity: 0.85; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      padding: 0 3.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-grid-bg {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.35;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+    }
+    .hero-center {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 7rem;
+      position: relative; z-index: 1;
+    }
+    .hero-eyebrow {
+      display: flex; align-items: center; gap: 0.8rem;
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 2rem;
+      opacity: 0; animation: rise 0.7s 0.1s forwards;
+    }
+    .dot-blink {
+      width: 7px; height: 7px;
+      background: var(--accent); border-radius: 50%;
+      animation: blink 2s infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+    .hero-name {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(4rem, 10vw, 9rem);
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      opacity: 0; animation: rise 0.8s 0.25s forwards;
+    }
+    .hero-name .italic { font-style: italic; color: var(--accent); }
+    .hero-tagline {
+      margin-top: 2.2rem;
+      font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+      color: var(--muted);
+      max-width: 520px;
+      font-weight: 400;
+      line-height: 1.7;
+      opacity: 0; animation: rise 0.8s 0.4s forwards;
+    }
+    .hero-actions {
+      margin-top: 3rem;
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      opacity: 0; animation: rise 0.8s 0.55s forwards;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.7rem 1.6rem;
+      font-family: 'Syne', sans-serif; font-size: 0.8rem;
+      font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      text-decoration: none; border-radius: 4px; border: none;
+      cursor: none; transition: all 0.22s;
+    }
+    .btn-accent { background: var(--accent); color: var(--bg); }
+    .btn-accent:hover { background: var(--accent2); transform: translateY(-2px); }
+    .btn-ghost {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    .hero-scroll-hint {
+      padding: 2rem 0;
+      font-size: 0.7rem; letter-spacing: 0.1em; color: var(--muted);
+      text-transform: uppercase; z-index: 1;
+      display: flex; align-items: center; gap: 1rem;
+      opacity: 0; animation: rise 0.7s 1s forwards;
+    }
+    .scroll-line { flex: 1; max-width: 60px; height: 1px; background: var(--border); }
+
+    /* ── PHOTO ── */
+    .hero-photo-wrap {
+      position: absolute; right: 5%; top: 0; height: 100%;
+      width: 500px; height: 600px;
+      opacity: 0; animation: rise 1s 0.7s forwards;
+      z-index: 1;
+    }
+    .hero-photo-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top center; height: 100%; width: 100%; height: 100%; width: 100%; height: 100%; width: 100%; height: 100%; width: 100%;
+      border-radius: 0;
+      filter: none;
+      border: none;
+    }
+    .hero-photo-wrap::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 30%, var(--bg) 75%);
+      z-index: 2; border-radius: 4px 4px 0 0;
+      pointer-events: none;
+    }
+
+    /* ── TYPING ── */
+    .typing-wrap {
+      display: flex; align-items: center; gap: 0.5rem;
+      margin-top: 1.2rem; height: 1.6rem;
+      opacity: 0; animation: rise 0.8s 0.45s forwards;
+    }
+    .typing-prefix { font-size: 0.82rem; color: var(--muted); }
+    .typing-text { font-size: 0.82rem; color: var(--accent); font-weight: 600; letter-spacing: 0.04em; }
+    .typing-cursor {
+      width: 2px; height: 1rem; background: var(--accent);
+      display: inline-block; margin-left: 1px;
+      animation: blink 0.8s infinite;
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      padding: 0.9rem 0;
+      background: var(--surface);
+    }
+    .marquee-track {
+      display: flex; gap: 3rem;
+      white-space: nowrap;
+      animation: scroll-left 28s linear infinite;
+    }
+    .marquee-track span {
+      font-size: 0.75rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+      flex-shrink: 0;
+    }
+    .marquee-track span.highlight { color: var(--accent); }
+    @keyframes scroll-left { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* ── SECTIONS ── */
+    section { padding: 6rem 3.5rem; }
+    .sec-label {
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.5rem;
+    }
+    .sec-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      line-height: 1.05; letter-spacing: -0.02em;
+      margin-bottom: 3.5rem;
+    }
+    .sec-title em { font-style: italic; color: var(--warm); }
+
+    /* ── ABOUT ── */
+    #about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+      border-top: 1px solid var(--border);
+    }
+    .about-left {}
+    .about-body { color: var(--muted); font-size: 0.9rem; line-height: 1.8; }
+    .about-body p + p { margin-top: 1.2rem; }
+    .about-body strong { color: var(--text); font-weight: 600; }
+    .about-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; }
+    .chip {
+      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.07em;
+      text-transform: uppercase;
+      border: 1px solid var(--border); color: var(--muted);
+      padding: 0.3rem 0.75rem; border-radius: 3px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .chip:hover { border-color: var(--accent); color: var(--accent); }
+
+    .about-right {}
+    .stat-list { display: flex; flex-direction: column; gap: 0; }
+    .stat-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .stat-row:first-child { border-top: 1px solid var(--border); }
+    .stat-n {
+      font-family: 'Instrument Serif', serif;
+      font-size: 2.8rem; line-height: 1;
+      color: var(--accent);
+    }
+    .stat-lbl { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.05em; }
+
+    .exp-list { margin-top: 3rem; display: flex; flex-direction: column; gap: 0; }
+    .exp-row {
+      padding: 1.4rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .exp-row:first-child { border-top: 1px solid var(--border); }
+    .exp-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+    .exp-company { font-size: 0.85rem; font-weight: 600; color: var(--text); }
+    .exp-role { font-size: 0.78rem; color: var(--accent); margin-top: 0.15rem; }
+    .exp-date {
+      font-size: 0.68rem; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted);
+      white-space: nowrap; margin-top: 0.1rem;
+    }
+    .exp-desc { font-size: 0.8rem; color: var(--muted); margin-top: 0.6rem; line-height: 1.6; }
+
+    /* ── PROJECTS ── */
+    #projects { border-top: 1px solid var(--border); }
+    .projects-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; }
+    .projects-header .sec-title { margin-bottom: 0; }
+    .gh-link {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .gh-link:hover { color: var(--accent); }
+    .gh-link svg { width: 16px; height: 16px; fill: currentColor; }
+
+    .projects-list { display: flex; flex-direction: column; gap: 0; }
+    .proj-row {
+      display: grid;
+      grid-template-columns: 2fr 3fr 2fr;
+      gap: 3rem;
+      align-items: start;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+      position: relative;
+    }
+    .proj-row:first-child { border-top: 1px solid var(--border); }
+    .proj-row::before {
+      content: '';
+      position: absolute; inset: 0 -3.5rem;
+      background: var(--surface);
+      opacity: 0; transition: opacity 0.25s; pointer-events: none;
+      z-index: -1;
+    }
+    .proj-row:hover::before { opacity: 1; }
+    .proj-num {
+      font-family: 'Instrument Serif', serif;
+      font-size: 0.75rem; color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .proj-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.4rem; line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+    .proj-desc {
+      font-size: 0.82rem; color: var(--muted);
+      line-height: 1.7;
+    }
+    .proj-meta { text-align: right; }
+    .proj-tags { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0.4rem; margin-bottom: 1rem; }
+    .tag {
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 0.22rem 0.65rem; border-radius: 100px;
+      background: rgba(127,255,106,0.08); color: var(--accent);
+      border: 1px solid rgba(127,255,106,0.2);
+    }
+    .proj-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.07em;
+      text-transform: uppercase; color: var(--muted);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .proj-link:hover { color: var(--accent); }
+    .proj-link svg { width: 13px; height: 13px; fill: currentColor; }
+
+    /* ── SKILLS ── */
+    #skills { border-top: 1px solid var(--border); }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+    .skill-group {}
+    .skill-group-name {
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1.2rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .skill-item {
+      font-size: 0.82rem; color: var(--muted);
+      padding: 0.5rem 0; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 0.6rem;
+      transition: color 0.2s;
+    }
+    .skill-item:hover { color: var(--text); }
+    .skill-item::before {
+      content: ''; width: 4px; height: 4px;
+      background: var(--border); border-radius: 50%;
+      flex-shrink: 0; transition: background 0.2s;
+    }
+    .skill-item:hover::before { background: var(--accent); }
+
+    /* ── CERTS ── */
+    #certs { border-top: 1px solid var(--border); background: var(--surface); }
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1px;
+      border: 1px solid var(--border);
+    }
+    .cert-card {
+      padding: 1.6rem; background: var(--surface);
+      transition: background 0.2s;
+    }
+    .cert-card:hover { background: var(--bg); }
+    .cert-issuer {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem;
+    }
+    .cert-name { font-size: 0.85rem; color: var(--text); line-height: 1.4; }
+
+    /* ── ACHIEVEMENTS ── */
+    #achievements { border-top: 1px solid var(--border); }
+    .ach-list { display: flex; flex-direction: column; gap: 0; }
+    .ach-row {
+      display: flex; align-items: flex-start; gap: 2rem;
+      padding: 1.6rem 0; border-bottom: 1px solid var(--border);
+    }
+    .ach-row:first-child { border-top: 1px solid var(--border); }
+    .ach-icon {
+      font-size: 1.4rem; flex-shrink: 0;
+      width: 44px; height: 44px;
+      background: rgba(127,255,106,0.06);
+      border: 1px solid var(--border); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ach-title { font-size: 0.88rem; font-weight: 600; color: var(--text); }
+    .ach-desc { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
+
+    /* ── CONTACT ── */
+    #contact {
+      border-top: 1px solid var(--border);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
+      align-items: start;
+    }
+    .contact-left .sec-title { margin-bottom: 1rem; }
+    .contact-intro { font-size: 0.9rem; color: var(--muted); margin-bottom: 2.5rem; line-height: 1.8; }
+    .contact-links { display: flex; flex-direction: column; gap: 0; }
+    .cl {
+      display: flex; align-items: center; gap: 1.2rem;
+      padding: 1rem 0; border-bottom: 1px solid var(--border);
+      text-decoration: none; color: var(--muted);
+      font-size: 0.83rem; transition: color 0.2s;
+    }
+    .cl:first-child { border-top: 1px solid var(--border); }
+    .cl:hover { color: var(--accent); }
+    .cl-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; width: 60px; flex-shrink: 0; }
+    .cl-arrow { margin-left: auto; opacity: 0; transition: opacity 0.2s, transform 0.2s; }
+    .cl:hover .cl-arrow { opacity: 1; transform: translate(3px, -3px); }
+
+    .contact-right {}
+    .form-group { margin-bottom: 1.4rem; }
+    .form-group label {
+      display: block; font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 0.5rem;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 4px;
+      padding: 0.8rem 1rem; color: var(--text);
+      font-family: 'Syne', sans-serif; font-size: 0.85rem;
+      outline: none; transition: border-color 0.2s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--accent); }
+    .form-group textarea { resize: vertical; min-height: 140px; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 3.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    footer p { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.05em; }
+    .footer-love { color: var(--accent); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.on { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1.1rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      section, #about, #contact { padding: 4rem 1.5rem; }
+      #hero { padding: 0 1.5rem; }
+      #about, #contact { grid-template-columns: 1fr; gap: 3rem; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .proj-row { grid-template-columns: 1fr; gap: 0.8rem; }
+      .proj-meta { text-align: left; }
+      .proj-tags { justify-content: flex-start; }
+      .projects-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      footer { flex-direction: column; gap: 0.5rem; padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Nisha<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" class="nav-badge">Hire Me</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-center">
+    <div class="hero-eyebrow">
+      <div class="dot-blink"></div>
+      <span>Open to opportunities · Visakhapatnam, India</span>
+    </div>
+    <h1 class="hero-name">
+      Nisha<br/>
+      <span class="italic">Kumari.</span>
+    </h1>
+    <p class="hero-tagline">
+      Final-year IT student building at the intersection of <strong style="color:var(--text)">AI automation</strong>, 
+      <strong style="color:var(--text)">full-stack development</strong>, and 
+      <strong style="color:var(--text)">cybersecurity</strong>. 
+      I ship things that actually work.
+    </p>
+    <div class="typing-wrap">
+      <span class="typing-prefix">I</span>
+      <span class="typing-text" id="typing-text"></span>
+      <span class="typing-cursor"></span>
+    </div>
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-accent">See my work ↓</a>
+      <a href="https://github.com/Nishaku123" target="_blank" class="btn btn-ghost">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a href="http://localhost:3001/api/resume/download" class="btn btn-ghost" id="resume-btn">
+        Download Resume ↓
+      </a>
+    </div>
+  </div>
+  <div class="hero-photo-wrap">
+    <a href="https://www.linkedin.com/in/nisha-kumari-63a1b9289" target="_blank">
+      <img src="portfolio-img.png" alt="Nisha Kumari"/>
+    </a>
+  </div>
+  <div class="hero-scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scroll to explore</span>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="highlight">Python</span><span>·</span>
+    <span>LangChain</span><span>·</span>
+    <span class="highlight">LangGraph</span><span>·</span>
+    <span>MCP</span><span>·</span>
+    <span class="highlight">N8N Automation</span><span>·</span>
+    <span>Docker</span><span>·</span>
+    <span class="highlight">JavaScript</span><span>·</span>
+    <span>Scikit-learn</span><span>·</span>
+    <span class="highlight">FastAPI</span><span>·</span>
+    <span>Cybersecurity</span><span>·</span>
+    <span class="highlight">Google Cloud</span><span>·</span>
+    <span>REST APIs</span><span>·</span>
+    <span class="highlight">Python</span><span>·</span>
+    <span>LangChain</span><span>·</span>
+    <span class="highlight">LangGraph</span><span>·</span>
+    <span>MCP</span><span>·</span>
+    <span class="highlight">N8N Automation</span><span>·</span>
+    <span>Docker</span><span>·</span>
+    <span class="highlight">JavaScript</span><span>·</span>
+    <span>Scikit-learn</span><span>·</span>
+    <span class="highlight">FastAPI</span><span>·</span>
+    <span>Cybersecurity</span><span>·</span>
+    <span class="highlight">Google Cloud</span><span>·</span>
+    <span>REST APIs</span><span>·</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="reveal">
+  <div class="about-left">
+    <p class="sec-label">About me</p>
+    <h2 class="sec-title">Building <em>real</em> things<br/>since 2022.</h2>
+    <div class="about-body">
+      <p>
+        I'm Nisha — a final-year <strong>B.Tech Information Technology</strong> student at Vignan's Institute of Engineering for Women, Visakhapatnam. I graduate in 2026 with a CGPA of 7.66.
+      </p>
+      <p>
+        Right now I'm interning at <strong>MakerInMe Technologies</strong> in Bangalore, building <strong>AI agent prototypes</strong> with LangChain and LangGraph, self-hosting automation pipelines with N8N on Docker, and integrating agents with live data sources using <strong>Model Context Protocol (MCP)</strong>.
+      </p>
+      <p>
+        I've also done stints in <strong>cybersecurity</strong> (threat detection, KNN malware models) and <strong>AI/ML</strong> (Edunet + APSSDC). I enjoy working across the whole stack — from NLP-powered browser assistants to automated document workflows.
+      </p>
+    </div>
+    <div class="about-tags">
+      <span class="chip">AI Agents</span>
+      <span class="chip">LangChain</span>
+      <span class="chip">Workflow Automation</span>
+      <span class="chip">Python</span>
+      <span class="chip">ML / Data Science</span>
+      <span class="chip">Cybersecurity</span>
+      <span class="chip">Full-Stack</span>
+      <span class="chip">Docker</span>
+    </div>
+  </div>
+
+  <div class="about-right">
+    <div class="stat-list">
+      <div class="stat-row">
+        <div>
+          <div class="stat-n">3</div>
+          <div class="stat-lbl">Internship experiences</div>
+        </div>
+        <div>
+          <div class="stat-n">6+</div>
+          <div class="stat-lbl">Projects shipped</div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div>
+          <div class="stat-n">10+</div>
+          <div class="stat-lbl">Certifications earned</div>
+        </div>
+        <div>
+          <div class="stat-n">3</div>
+          <div class="stat-lbl">Languages spoken</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-list">
+      <div class="exp-row">
+        <div class="exp-top">
+          <div>
+            <div class="exp-company">MakerInMe Technologies</div>
+            <div class="exp-role">Product Development Intern</div>
+          </div>
+          <div class="exp-date">Dec 2025 – Present</div>
+        </div>
+        <div class="exp-desc">AI agent prototypes with LangChain + LangGraph, N8N automation self-hosted via Docker, MCP integration for live data sources.</div>
+      </div>
+      <div class="exp-row">
+        <div class="exp-top">
+          <div>
+            <div class="exp-company">iGaruda Secure Cyber Solutions</div>
+            <div class="exp-role">Cybersecurity Intern</div>
+          </div>
+          <div class="exp-date">May – Jun 2025</div>
+        </div>
+        <div class="exp-desc">KNN-based malware detection model, vulnerability assessments, data protection & secure design practices.</div>
+      </div>
+      <div class="exp-row">
+        <div class="exp-top">
+          <div>
+            <div class="exp-company">Edunet Foundation – APSSDC</div>
+            <div class="exp-role">AI & ML Intern</div>
+          </div>
+          <div class="exp-date">Jun – Jul 2024</div>
+        </div>
+        <div class="exp-desc">AI model workflows, data analysis fundamentals, problem-solving through ML pipelines.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="reveal">
+  <div class="projects-header">
+    <div>
+      <p class="sec-label">Work</p>
+      <h2 class="sec-title">Selected <em>projects.</em></h2>
+    </div>
+    <a href="https://github.com/Nishaku123" target="_blank" class="gh-link">
+      <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      View all on GitHub ↗
+    </a>
+  </div>
+
+  <div class="projects-list">
+
+    <div class="proj-row">
+      <div>
+        <div class="proj-num">01</div>
+        <div class="proj-title">MCP Travel Agent</div>
+      </div>
+      <div class="proj-desc">
+        An MCP-based flight and hotel search agent that connects AI reasoning with real-time travel APIs. Demonstrates bridging LLMs with live external data sources via Model Context Protocol for context-aware, multi-step travel planning.
+      </div>
+      <div class="proj-meta">
+        <div class="proj-tags">
+          <span class="tag">Python</span>
+          <span class="tag">MCP</span>
+          <span class="tag">AI Agents</span>
+        </div>
+        <a href="https://github.com/Nishaku123/Mcp-travel-agent" target="_blank" class="proj-link">
+          View on GitHub
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="proj-row">
+      <div>
+        <div class="proj-num">02</div>
+        <div class="proj-title">MCP Realtime Agent</div>
+      </div>
+      <div class="proj-desc">
+        A real-time AI agent built with MCP, capable of fetching and acting on live data streams. Showcases advanced agent orchestration patterns using Python — bridging dynamic tool calls with LLM decision-making in real time.
+      </div>
+      <div class="proj-meta">
+        <div class="proj-tags">
+          <span class="tag">Python</span>
+          <span class="tag">MCP</span>
+          <span class="tag">Realtime</span>
+        </div>
+        <a href="https://github.com/Nishaku123/MCP-REALTIME-AGENT" target="_blank" class="proj-link">
+          View on GitHub
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="proj-row">
+      <div>
+        <div class="proj-num">03</div>
+        <div class="proj-title">KALIX — Virtual Assistant</div>
+      </div>
+      <div class="proj-desc">
+        Browser-based AI voice assistant answering questions, searching the web, and opening sites — all via natural speech. Built entirely with HTML, CSS, and JavaScript with Web Speech API integration, no backend required.
+      </div>
+      <div class="proj-meta">
+        <div class="proj-tags">
+          <span class="tag">JavaScript</span>
+          <span class="tag">NLP</span>
+          <span class="tag">Web Speech API</span>
+        </div>
+        <a href="https://github.com/Nishaku123/KALIX--A-VIRTUAL-ASSISTANT" target="_blank" class="proj-link">
+          View on GitHub
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="proj-row">
+      <div>
+        <div class="proj-num">04</div>
+        <div class="proj-title">Employee Burnout Analysis</div>
+      </div>
+      <div class="proj-desc">
+        ML pipeline to detect burnout risk in employees using classification models (Scikit-learn), feature engineering on work-pattern data, and an HR dashboard simulating policy interventions. Visualized with Matplotlib.
+      </div>
+      <div class="proj-meta">
+        <div class="proj-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Scikit-learn</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">ML</span>
+        </div>
+        <a href="https://github.com/Nishaku123/EMPLOYEE_BURNOUT_ANALYSIS" target="_blank" class="proj-link">
+          View on GitHub
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="proj-row">
+      <div>
+        <div class="proj-num">05</div>
+        <div class="proj-title">Doc Processing System</div>
+      </div>
+      <div class="proj-desc">
+        End-to-end automated document workflow built with N8N (self-hosted via Docker): OCR-based text extraction, Mistral AI for intelligent understanding, Google Drive for storage, and Sheets for structured data output.
+      </div>
+      <div class="proj-meta">
+        <div class="proj-tags">
+          <span class="tag">N8N</span>
+          <span class="tag">Mistral AI</span>
+          <span class="tag">Docker</span>
+          <span class="tag">OCR</span>
+        </div>
+        <a href="https://github.com/Nishaku123" target="_blank" class="proj-link">
+          View on GitHub
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="reveal">
+  <p class="sec-label">Toolkit</p>
+  <h2 class="sec-title">What I <em>work with.</em></h2>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-name">Languages</div>
+      <div class="skill-item">Python</div>
+      <div class="skill-item">JavaScript</div>
+      <div class="skill-item">C / C++</div>
+      <div class="skill-item">HTML5 & CSS3</div>
+      <div class="skill-item">SQL (MySQL)</div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-name">AI / ML</div>
+      <div class="skill-item">LangChain</div>
+      <div class="skill-item">LangGraph</div>
+      <div class="skill-item">MCP (Model Context Protocol)</div>
+      <div class="skill-item">Scikit-learn</div>
+      <div class="skill-item">Pandas / NumPy</div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-name">Tools & Infra</div>
+      <div class="skill-item">N8N Automation</div>
+      <div class="skill-item">Docker</div>
+      <div class="skill-item">Google Cloud Platform</div>
+      <div class="skill-item">GitHub</div>
+      <div class="skill-item">VS Code / Colab</div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-name">Concepts</div>
+      <div class="skill-item">REST APIs</div>
+      <div class="skill-item">Data Structures & Algorithms</div>
+      <div class="skill-item">OOP</div>
+      <div class="skill-item">Cybersecurity Fundamentals</div>
+      <div class="skill-item">SDLC</div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTS -->
+<section id="certs" class="reveal">
+  <p class="sec-label">Certifications</p>
+  <h2 class="sec-title">Always <em>learning.</em></h2>
+  <div class="certs-grid">
+    <div class="cert-card"><div class="cert-issuer">IBM</div><div class="cert-name">AI in Practice</div></div>
+    <div class="cert-card"><div class="cert-issuer">IBM</div><div class="cert-name">Natural Language Processing & Computer Vision</div></div>
+    <div class="cert-card"><div class="cert-issuer">Udemy</div><div class="cert-name">Complete Python Bootcamp</div></div>
+    <div class="cert-card"><div class="cert-issuer">NPTEL</div><div class="cert-name">Problem Solving Through Programming in C</div></div>
+    <div class="cert-card"><div class="cert-issuer">Udemy</div><div class="cert-name">Complete JavaScript + HTML5, CSS3</div></div>
+    <div class="cert-card"><div class="cert-issuer">ExcelR</div><div class="cert-name">Fundamentals of Full Stack Development</div></div>
+    <div class="cert-card"><div class="cert-issuer">Accenture</div><div class="cert-name">FutureSkills Prime — AI Ascend</div></div>
+    <div class="cert-card"><div class="cert-issuer">CNA</div><div class="cert-name">Introduction to Cybersecurity</div></div>
+    <div class="cert-card"><div class="cert-issuer">NPTEL</div><div class="cert-name">Cloud Computing</div></div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements" class="reveal">
+  <p class="sec-label">Highlights</p>
+  <h2 class="sec-title">Things I'm <em>proud of.</em></h2>
+  <div class="ach-list">
+    <div class="ach-row">
+      <div class="ach-icon">🥈</div>
+      <div>
+        <div class="ach-title">2nd Prize — YI Innovation Challenge</div>
+        <div class="ach-desc">Developed and pitched a real-world tech solution addressing a social issue to a panel of judges.</div>
+      </div>
+    </div>
+    <div class="ach-row">
+      <div class="ach-icon">⭐</div>
+      <div>
+        <div class="ach-title">Best Performer — Naandi Foundation Employability Skills Training</div>
+        <div class="ach-desc">Awarded for consistent high performance across a 7-day intensive employability training programme.</div>
+      </div>
+    </div>
+    <div class="ach-row">
+      <div class="ach-icon">🎤</div>
+      <div>
+        <div class="ach-title">Student Coordinator & Anchor — TECHRITZ / Appscape Designathon</div>
+        <div class="ach-desc">Managed end-to-end event operations and hosted technical talks and workshops on campus.</div>
+      </div>
+    </div>
+    <div class="ach-row">
+      <div class="ach-icon">🌐</div>
+      <div>
+        <div class="ach-title">Trilingual — English, Hindi, Telugu</div>
+        <div class="ach-desc">Fluent communicator across three languages, enabling cross-cultural collaboration in diverse teams.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="reveal">
+  <div class="contact-left">
+    <p class="sec-label">Contact</p>
+    <h2 class="sec-title">Let's build<br/><em>something.</em></h2>
+    <p class="contact-intro">
+      I'm actively looking for full-time roles, internships, and interesting projects after graduation in 2026. Whether it's AI, automation, backend, or full-stack — reach out.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:nishamanjhi630@gmail.com" class="cl">
+        <span class="cl-label">Email</span>
+        nishamanjhi630@gmail.com
+        <span class="cl-arrow">↗</span>
+      </a>
+      <a href="tel:+916301250771" class="cl">
+        <span class="cl-label">Phone</span>
+        +91 63012 50771
+        <span class="cl-arrow">↗</span>
+      </a>
+      <a href="https://github.com/Nishaku123" target="_blank" class="cl">
+        <span class="cl-label">GitHub</span>
+        github.com/Nishaku123
+        <span class="cl-arrow">↗</span>
+      </a>
+      <a href="https://www.linkedin.com/in/nisha-kumari-63a1b9289" target="_blank" class="cl">
+        <span class="cl-label">LinkedIn</span>
+        nisha-kumari-63a1b9289
+        <span class="cl-arrow">↗</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="contact-right">
+    <form onsubmit="sendMsg(event)">
+      <div class="form-group">
+        <label>Your name</label>
+        <input type="text" placeholder="Priya Sharma" required/>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="priya@company.com" required/>
+      </div>
+      <div class="form-group">
+        <label>What's on your mind?</label>
+        <textarea placeholder="Hi Nisha, I'd love to chat about..." required></textarea>
+      </div>
+      <button type="submit" class="btn btn-accent" id="submit-btn">Send message ↗</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Nisha Kumari — Visakhapatnam, India</p>
+  <p>Designed & coded with <span class="footer-love">♥</span> — open to work</p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // ── Typing animation ──
+  const phrases = [
+    'build AI agents.',
+    'automate workflows.',
+    'write clean code.',
+    'solve real problems.',
+    'learn every day.'
+  ];
+  let pi = 0, ci = 0, deleting = false;
+  const typingEl = document.getElementById('typing-text');
+  function type() {
+    const phrase = phrases[pi];
+    if (!deleting) {
+      typingEl.textContent = phrase.slice(0, ++ci);
+      if (ci === phrase.length) { deleting = true; setTimeout(type, 1800); return; }
+    } else {
+      typingEl.textContent = phrase.slice(0, --ci);
+      if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; }
+    }
+    setTimeout(type, deleting ? 40 : 70);
+  }
+  setTimeout(type, 1200);
+
+  // ── Custom cursor ──
+  const cur = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  let rx = 0, ry = 0, mx = 0, my = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.left = mx + 'px'; cur.style.top = my + 'px'; });
+  function animRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+
+  // ── Nav on scroll ──
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // ── Scroll reveal ──
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // ── Contact form ──
+  function sendMsg(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    const form = e.target;
+    const name    = form.querySelector('input[type="text"]').value;
+    const email   = form.querySelector('input[type="email"]').value;
+    const message = form.querySelector('textarea').value;
+    btn.textContent = 'Sending...';
+    btn.style.opacity = '0.7';
+    fetch('http://localhost:3001/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, message }),
+    }).then(function(res) {
+      return res.json().then(function(data) {
+        if (res.ok) {
+          btn.textContent = 'Sent!';
+          btn.style.background = '#2db37b';
+          btn.style.opacity = '1';
+          form.reset();
+        } else {
+          btn.textContent = data.error || 'Error';
+          btn.style.background = '#ff6b6b';
+          btn.style.opacity = '1';
+        }
+        setTimeout(function() { btn.textContent = 'Send message'; btn.style.background = ''; }, 3500);
+      });
+    }).catch(function() {
+      btn.textContent = 'Could not connect';
+      btn.style.background = '#ff6b6b';
+      btn.style.opacity = '1';
+      setTimeout(function() { btn.textContent = 'Send message'; btn.style.background = ''; }, 3500);
+    });
+  }
+</script>
+</body>
+</html>
