@@ -517,9 +517,11 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       nav { padding: 1.1rem 1.5rem; }
-      .nav-links { gap: 1.5rem; }
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: 0.7rem; }
+      .nav-badge { display: none; }
       section, #about, #contact { padding: 4rem 1.5rem; }
-      #hero { padding: 0 1.5rem; }
+      #hero { padding: 0 1.5rem; min-height: 100vh; display: flex; flex-direction: column; }
       #about, #contact { grid-template-columns: 1fr; gap: 3rem; }
       .skills-grid { grid-template-columns: 1fr 1fr; }
       .proj-row { grid-template-columns: 1fr; gap: 0.8rem; }
@@ -527,6 +529,17 @@
       .proj-tags { justify-content: flex-start; }
       .projects-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
       footer { flex-direction: column; gap: 0.5rem; padding: 1.5rem; }
+      .hero-center { padding-top: 7rem; padding-bottom: 2rem; order: 1; }
+      .hero-photo-wrap {
+        position: relative;
+        right: auto; top: auto;
+        width: 100%; height: 320px;
+        order: 2;
+      }
+      .hero-photo-wrap img { object-position: top center; }
+      .hero-scroll-hint { order: 3; }
+      .hero-name { font-size: clamp(3rem, 12vw, 5rem); }
+      .hero-tagline { max-width: 100%; }
     }
   </style>
 </head>
